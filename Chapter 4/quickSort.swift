@@ -1,5 +1,5 @@
 func getMedianOfThree<T: Comparable>(_ list: inout [T], lo: Int, hi: Int) -> T {
-    let center: Int = lo + (hi - lo) / 2
+    let center: Int = (lo + hi) / 2
     if list[lo] > list[center] {
         list.swapAt(lo, center)
     }
@@ -11,10 +11,8 @@ func getMedianOfThree<T: Comparable>(_ list: inout [T], lo: Int, hi: Int) -> T {
     if list[center] > list[hi] {
         list.swapAt(center, hi)
     }
-    
-    list.swapAt(center, hi)
 
-    return list[hi]
+    return list[center]
 }
 
 func partition<T: Comparable>(_ list: inout [T], lo: Int, hi: Int, midian: T) -> Int {
@@ -28,8 +26,9 @@ func partition<T: Comparable>(_ list: inout [T], lo: Int, hi: Int, midian: T) ->
         while list[hiPointer] > pivot { hiPointer -= 1 }
         if loPointer >= hiPointer {
             return hiPointer
+        } else {
+            list.swapAt(loPointer, hiPointer)
         }
-        list.swapAt(loPointer, hiPointer)
     }
 }
 
